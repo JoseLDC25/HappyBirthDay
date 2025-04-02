@@ -88,6 +88,7 @@ function launchConfetti() {
 function App() {
   const [showCake, setShowCake] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [showGift, setShowGift] = useState(false);
 
   const handleClick = () => {
     launchConfetti();
@@ -144,6 +145,29 @@ function App() {
             )}
           </>
         )}
+
+        {showMessage && (
+          <div className="surprise-container">
+            <button className="surprise-button" onClick={() => setShowGift(true)}>
+              🎁 Abre tu regalo
+            </button>
+          </div>
+        )}
+        {showGift && (
+          <div className="gift-reveal">
+            <p>✨ Aquí va algo muy especial para ti...</p>
+            <iframe
+              width="300"
+              height="170"
+              src="https://www.youtube.com/watch?v=wP1rrsvGBTk"
+              title="Regalo musical"
+              frameBorder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        )}
+
       </div>
     </div>
   );

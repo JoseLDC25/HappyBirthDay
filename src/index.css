@@ -241,3 +241,36 @@ body {
     height: 60px;
   }
 }
+
+
+.surprise-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.surprise-button {
+  padding: 10px 25px;
+  background-color: #ff99cc;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.surprise-button:hover {
+  background-color: #ff66b2;
+}
+
+.gift-reveal {
+  margin-top: 20px;
+  text-align: center;
+  animation: fadeIn 2s ease;
+}
+
+.gift-reveal p {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 1.2rem;
+  color: #cc0066;
+}

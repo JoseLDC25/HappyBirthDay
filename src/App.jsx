@@ -157,14 +157,14 @@ function App() {
           <div className="gift-reveal">
             <p>✨ Aquí va algo muy especial para ti...</p>
             <iframe
-              width="300"
-              height="170"
-              src="https://www.youtube.com/watch?v=wP1rrsvGBTk"
-              title="Regalo musical"
-              frameBorder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            width="300"
+            height="170"
+            src="https://www.youtube.com/embed/wP1rrsvGBTk"
+            title="Regalo musical"
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
           </div>
         )}
 

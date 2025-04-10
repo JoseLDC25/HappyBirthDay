@@ -274,3 +274,44 @@ body {
   font-size: 1.2rem;
   color: #cc0066;
 }
+
+
+
+
+@media screen and (max-width: 768px) {
+  .animated-cake {
+    animation: mobileCakeIn 1.8s ease-out forwards, glow 3s infinite ease-in-out;
+  }
+
+  @keyframes mobileCakeIn {
+    0% {
+      transform: translateY(50px) scale(0.5);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .card-message {
+    font-size: 0.85rem;
+    animation: slideUp 1.5s ease-in-out;
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(40px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+

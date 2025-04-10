@@ -1,99 +1,120 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Typical from 'react-typical';
 import confetti from 'canvas-confetti';
 
 function launchConfetti() {
-  const heart = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA3MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTYuNDAxMiAwQzcuMzI1NzkgMCAwIDcuNDc0NDEgMCAxNi42NjU4QzAgMjYuNzYxNCAxMC4zNDIzIDM1LjM4MjcgMzQuNzUgNTkuNEM1OS42NTcgMzYuNDg2MSA3MCAyNi42NzY2IDcwIDE2LjY2NThDNzAgNy40NzQ0MSA2Mi42NzQyIDAgNTMuNTk4OCAwQzQ2LjM1MjQgMCAzOS43NzU4IDQuNDMyMjkgMzUuODQzNSA5LjYzMTVDMzEuOTM4MiA0LjQzMjI5IDI1LjM2MjQgMCAxNi40MDEyIDBaIiBmaWxsPSIjZmY2Njk5Ii8+PC9zdmc+';
-  const flower = 'data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZjk5OWZmIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTM4NiAyNDBjMC0zMS44LTE2LjMtNjAuMy00MC0xMC4zLTIuNi02LjktNC40LTEzLjctNC40LTIxLjMgMC0zNiAxNS4yLTcwIDQxLjUtOTQgNC4yLTQuMiA5LjItOC41IDE0LjQtMTIgMC0yMC44LTQuNS0zOS45LTEyLjYtNTcuNC00MC42LTMwLjMtODguMy0yOS44LTEyOC43LjQtNC4yLTguOS05LjMtMTQuNC0xMi42LTE5LjMtMTEuMy00NS4xLTExLjMtNjQuNSAwdjJjLTUuNiAzLjMtMTAuMiA4LjQtMTQuNCAxMi42LTQwLjQgLTQuMi04OC4xLTMuOS0xMjguNyAwLTgwIDI3LjgtMTM2LjggMTE4LjItMTM2LjggMjA2IDAgNy42LS4xIDE1LjQgLjYgMjMuMSAyOC44LTIuMiA1Ni43LTIuMiA4NS41IDBjLTIyLjEtMzAuNS0zNS42LTY3LjYtMzUuNi0xMDYuNCAwLTEwMi44IDg0LjUtMTg2LjggMTg4LjgtMTg2LjggMTA0LjQgMCAxODguOSA4NC4xIDE4OC45IDE4Ni44IDAgMzgxLjgtMzguOSA2NjAuOC03Mi42IDY2MC44LTUwLjggMC04NS43LTY1LjUtODUuNy0xMjguOHoiLz48L3N2Zz4=';
+  // 🎊 CANVAS-CONFETTI
+  const confettiCanvas = document.createElement('canvas');
+  document.body.appendChild(confettiCanvas);
+  confettiCanvas.style.position = 'fixed';
+  confettiCanvas.style.pointerEvents = 'none';
+  confettiCanvas.style.top = '0';
+  confettiCanvas.style.left = '0';
+  confettiCanvas.style.width = '100%';
+  confettiCanvas.style.height = '100%';
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
 
-  const canvas = document.createElement('canvas');
-  document.body.appendChild(canvas);
-  canvas.style.position = 'fixed';
-  canvas.style.pointerEvents = 'none';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const myConfetti = confetti.create(canvas, {
-    resize: true,
-    useWorker: true
-  });
-
-  const duration = 3 * 1000;
+  const myConfetti = confetti.create(confettiCanvas, { resize: true, useWorker: true });
+  const duration = 4000;
   const end = Date.now() + duration;
 
   const colors = ['#ff6699', '#66ccff', '#ffcc00', '#cc99ff'];
 
   (function frame() {
-    myConfetti({
-      particleCount: 6,
-      angle: 60,
-      spread: 55,
-      origin: { x: 0, y: 0.5 }, 
-      colors,
-    });
-    
-    myConfetti({
-      particleCount: 6,
-      angle: 120,
-      spread: 55,
-      origin: { x: 1, y: 0.5 }, 
-      colors,
-    });
-    
-
-    // Corazones
-    myConfetti({
-      particleCount: 4,
-      angle: 90,
-      spread: 90,
-      origin: { y: 0.75 }, 
-      shapes: ['image'],
-      image: {
-        src: heart,
-        width: 25,
-        height: 25
-      }
-    });
-    
-
-    // Flores
-    myConfetti({
-      particleCount: 4,
-      angle: 90,
-      spread: 90,
-      origin: { y: 0.75 },
-      shapes: ['image'],
-      image: {
-        src: flower,
-        width: 25,
-        height: 25
-      }
-    });
-    
-
     if (Date.now() < end) {
+      myConfetti({
+        particleCount: 10,
+        angle: Math.random() * 360,
+        spread: 90,
+        origin: { x: Math.random(), y: Math.random() * 0.5 },
+        colors
+      });
       requestAnimationFrame(frame);
     } else {
-      // Limpia el canvas después
-      setTimeout(() => document.body.removeChild(canvas), 5000);
+      setTimeout(() => document.body.removeChild(confettiCanvas), 5000);
     }
   })();
-}
 
+  // 💖 EMOJIS FLOTANTES
+  const emojiCanvas = document.createElement('canvas');
+  document.body.appendChild(emojiCanvas);
+  emojiCanvas.style.position = 'fixed';
+  emojiCanvas.style.pointerEvents = 'none';
+  emojiCanvas.style.top = '0';
+  emojiCanvas.style.left = '0';
+  emojiCanvas.style.width = '100%';
+  emojiCanvas.style.height = '100%';
+  emojiCanvas.width = window.innerWidth;
+  emojiCanvas.height = window.innerHeight;
+
+  const ctx = emojiCanvas.getContext('2d');
+  const emojis = ['❤️', '🌸'];
+  const particles = Array.from({ length: 30 }, () => ({
+    emoji: emojis[Math.floor(Math.random() * emojis.length)],
+    x: Math.random() * emojiCanvas.width,
+    y: Math.random() * -emojiCanvas.height,
+    size: Math.random() * 20 + 10,
+    speed: Math.random() * 1.5 + 1,
+    angle: Math.random() * Math.PI * 2,
+    spin: Math.random() * 0.1 - 0.05,
+    opacity: 1
+  }));
+
+  function drawEmojiFrame() {
+    ctx.clearRect(0, 0, emojiCanvas.width, emojiCanvas.height);
+    let allInvisible = true;
+
+    particles.forEach(p => {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+
+      const relativeY = p.y / emojiCanvas.height;
+      p.opacity = Math.max(0, 1 - relativeY);
+      ctx.globalAlpha = p.opacity;
+      ctx.font = `${p.size}px serif`;
+      ctx.fillText(p.emoji, 0, 0);
+      ctx.restore();
+      ctx.globalAlpha = 1;
+
+      p.y += p.speed;
+      p.x += Math.sin(p.angle) * 1.2;
+      p.angle += p.spin;
+
+      if (p.opacity > 0) {
+        allInvisible = false;
+      }
+    });
+
+    if (!allInvisible) {
+      requestAnimationFrame(drawEmojiFrame);
+    } else {
+      document.body.removeChild(emojiCanvas);
+    }
+  }
+
+  drawEmojiFrame();
+}
 
 function App() {
   const [showCake, setShowCake] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
-  const [showGift, setShowGift] = useState(false);
+  const audioRef = useRef(null);
 
   const handleClick = () => {
     launchConfetti();
     setShowCake(true);
-    setTimeout(() => setShowMessage(true), 1000); // Mensaje aparece después de 1s
+    setTimeout(() => setShowMessage(true), 1000);
+
+    // 🎵 Reproducir música
+    if (!audioRef.current) {
+      audioRef.current = new Audio('Intrumental_Piano_Ludovico_Einaudi.mp3');
+      audioRef.current.loop = true;
+    }
+    audioRef.current.play().catch((err) => {
+      console.error("Error al reproducir audio:", err);
+    });
   };
 
   return (
@@ -123,9 +144,6 @@ function App() {
         />
       </section>
 
-      {/* Audio de fondo */}
-      <audio src="instrumental-piano.mp3" autoPlay loop hidden></audio>
-
       {/* Zona central */}
       <div style={{ textAlign: 'center', marginTop: '40px', minHeight: '200px' }}>
         {!showCake ? (
@@ -138,36 +156,16 @@ function App() {
             {showMessage && (
               <div className="card-message">
                 <p>
-                  Gracias por ser tú. 🎀 Este pastel es simbólico, pero el cariño que siento es real.  
-                  <br />¡Feliz cumple, Marisol! 💝
+                Son pocas las personas que considero importantes para mi vida, y tú eres una de ellas 💫. <br />
+                Gracias por ser tú… 💖 Eres una chava muy inteligente 📚 y que se esfuerza mucho con su carrera 💪. <br />
+                Aunque haya momentos difíciles, tú no te rindes ✨, y eso lo aprecio muchísimo de ti. <br />
+                Contigo todo es más divertido 😄💕. <br />
+                Se que este pastel simbólico 🎂 pero te quiero desear un feliz cumpleaños 🥳🎉, que te la pases súper bien 🙌💝
                 </p>
               </div>
             )}
           </>
         )}
-
-        {showMessage && (
-          <div className="surprise-container">
-            <button className="surprise-button" onClick={() => setShowGift(true)}>
-              🎁 Abre tu regalo
-            </button>
-          </div>
-        )}
-        {showGift && (
-          <div className="gift-reveal">
-            <p>✨ Aquí va algo muy especial para ti...</p>
-            <iframe
-            width="300"
-            height="170"
-            src="https://www.youtube.com/watch?v=7maJOI3QMu0&ab_channel=YirumaVEVO"
-            title="Regalo musical"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          </div>
-        )}
-
       </div>
     </div>
   );

@@ -173,6 +173,7 @@ body {
   border: 2px solid #ff99cc;
   padding: 15px;
   border-radius: 15px;
+  font-size: 1.3rem;
   font-family: 'Comic Sans MS', cursive;
   color: #cc0066;
   animation: fadeIn 2s ease-in-out;

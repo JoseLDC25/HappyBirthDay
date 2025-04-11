@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import Typical from 'react-typical';
 import confetti from 'canvas-confetti';
 
+
+
 function launchConfetti() {
   // 🎊 CANVAS-CONFETTI
   const confettiCanvas = document.createElement('canvas');
@@ -97,6 +99,87 @@ function launchConfetti() {
   drawEmojiFrame();
 }
 
+
+// function launchStarExplosionAt(x, y) {
+//   const canvas = document.createElement('canvas');
+//   canvas.style.position = 'fixed';
+//   canvas.style.left = '0';
+//   canvas.style.top = '0';
+//   canvas.style.pointerEvents = 'none';
+//   canvas.width = window.innerWidth;
+//   canvas.height = window.innerHeight;
+//   document.body.appendChild(canvas);
+
+//   const ctx = canvas.getContext('2d');
+//   const starImage = new Image();
+//   starImage.src = 'star.png'; // asegúrate de que esta imagen exista en /public
+
+//   const particles = Array.from({ length: 12 }, () => ({
+//     x,
+//     y,
+//     angle: Math.random() * 2 * Math.PI,
+//     speed: Math.random() * 2 + 1.5,
+//     size: Math.random() * 12 + 8,
+//     opacity: 1,
+//   }));
+
+//   starImage.onload = () => {
+//     function animate() {
+//       ctx.clearRect(0, 0, canvas.width, canvas.height);
+//       particles.forEach(p => {
+//         const dx = Math.cos(p.angle) * p.speed;
+//         const dy = Math.sin(p.angle) * p.speed;
+//         p.x += dx;
+//         p.y += dy;
+//         p.opacity -= 0.02;
+
+//         if (p.opacity > 0) {
+//           ctx.globalAlpha = p.opacity;
+//           ctx.drawImage(starImage, p.x, p.y, p.size, p.size);
+//         }
+//       });
+
+//       ctx.globalAlpha = 1;
+//       if (particles.some(p => p.opacity > 0)) {
+//         requestAnimationFrame(animate);
+//       } else {
+//         document.body.removeChild(canvas);
+//       }
+//     }
+
+//     animate();
+//   };
+// }
+
+
+function renderAnimatedTextByWord(text) {
+  return (
+    <p className="reveal-text">
+      {text.split(/\s+/).map((word, index) => (
+        <span
+          key={index}
+          className="word-wrapper"
+          style={{
+            display: 'inline-block',
+            opacity: 0,
+            animation: `fadeInWord 0.3s ease forwards`,
+            animationDelay: `${index * 0.2}s`,
+            position: 'relative',
+          }}
+          // onAnimationEnd={(e) => {
+          //   const rect = e.target.getBoundingClientRect();
+          //   launchStarExplosionAt(rect.left + rect.width / 2, rect.top + rect.height / 2);
+          // }}
+        >
+          {word}&nbsp;
+        </span>
+      ))}
+    </p>
+  );
+}
+
+
+
 function App() {
   const [showCake, setShowCake] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
@@ -155,13 +238,24 @@ function App() {
             <img src="cake.webp" alt="Pastel de cumpleaños" className="cake animated-cake" />
             {showMessage && (
               <div className="card-message">
-                <p>
+
+              {renderAnimatedTextByWord(
+                "Son pocas las personas que considero importantes para mi vida, y tú eres una de ellas 💫.\n" +
+                "Gracias por ser tú… 💖 Eres una chava muy inteligente 📚 y que se esfuerza mucho con su carrera 💪.\n" +
+                "Aunque haya momentos difíciles, tú no te rindes ✨, y eso lo aprecio muchísimo de ti.\n" +
+                "Contigo todo es más divertido 😄💕.\n" +
+                "Sé que este pastel es simbólico 🎂 pero te quiero desear un feliz cumpleaños 🥳🎉,\n" +
+                "que te la pases súper bien 🙌💝"
+              )}
+
+                {/* <p>
                 Son pocas las personas que considero importantes para mi vida, y tú eres una de ellas 💫. <br />
                 Gracias por ser tú… 💖 Eres una chava muy inteligente 📚 y que se esfuerza mucho con su carrera 💪. <br />
                 Aunque haya momentos difíciles, tú no te rindes ✨, y eso lo aprecio muchísimo de ti. <br />
                 Contigo todo es más divertido 😄💕. <br />
                 Se que este pastel simbólico 🎂 pero te quiero desear un feliz cumpleaños 🥳🎉, que te la pases súper bien 🙌💝
-                </p>
+                </p> */}
+
               </div>
             )}
           </>

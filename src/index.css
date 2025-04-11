@@ -316,3 +316,45 @@ body {
 }
 
 
+.reveal-text span {
+  opacity: 0;
+  display: inline-block;
+  animation: fadeInWord 0.3s ease forwards;
+}
+
+@keyframes fadeInWord {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+@keyframes sparkle {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+.sparkle {
+  position: absolute;
+  color: gold;
+  font-size: 1.1em;
+  animation: sparkle 0.6s ease-out;
+  pointer-events: none;
+  z-index: 10;
+}
